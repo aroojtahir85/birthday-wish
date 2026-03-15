@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Birthday Countdown!</title>
+<style>
+  body {
+    text-align: center;
+    background: linear-gradient(135deg, #ffe6f2, #fff0f5);
+    font-family: 'Arial', sans-serif;
+  }
+  h1 { color: #ff3399; margin-top: 50px; font-size: 40px; }
+  #countdown { font-size: 35px; color: #ff0066; margin-top: 40px; }
+  p { font-size: 20px; color: #800040; }
+  img { width: 300px; border-radius: 15px; margin: 20px; display: none; }
+  audio { display: none; margin-top: 20px; }
+</style>
+</head>
+<body>
+
+<h1>🎉 Happy Birthday, [hainaa]! 🎂</h1>
+<p id="message">Message: [hi]</p>
+<p id="birthday-time">Birthday starts on 8th April 2026 12:00 AM</p>
+
+<div id="countdown">Loading countdown...</div>
+
+<img id="birthday-photo" src="[PHOTO URL]" alt="Birthday Photo">
+<audio id="birthday-music" controls>
+  <source src="[MUSIC URL]" type="audio/mpeg">
+  Your browser does not support the audio element.
+</audio>
+
+<script>
+const birthday = new Date("2026-04-08T00:00:00"); // Birthday date & time
+const countdownEl = document.getElementById("countdown");
+const photoEl = document.getElementById("birthday-photo");
+const musicEl = document.getElementById("birthday-music");
+
+function updateCountdown() {
+  const now = new Date();
+  const diff = birthday - now;
+
+  if(diff <= 0) {
+    countdownEl.style.display = "none";
+    photoEl.style.display = "block";
+    musicEl.style.display = "block";
+    musicEl.play();
+    return;
+  }
+
+  const days = Math.floor(diff / (1000*60*60*24));
+  const hours = Math.floor((diff % (1000*60*60*24)) / (1000*60*60));
+  const minutes = Math.floor((diff % (1000*60*60)) / (1000*60));
+  const seconds = Math.floor((diff % (1000*60)) / 1000);
+
+  countdownEl.textContent = `Countdown: ${days}d ${hours}h ${minutes}m ${seconds}s`;
+}
+
+setInterval(updateCountdown, 1000);
+updateCountdown();
+</script>
+
+</body>
+    </html>
